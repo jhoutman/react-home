@@ -8,13 +8,13 @@ import Input from './Input';
 const SortableItem = SortableElement(({ completed, text, id, onClickAction, index }) => (
   <StyledListItem completed={completed}>
     <Checkbox onClick={() => onClickAction({id})} checked={completed && 'checked'} value={index} />
-    {text}
+    <StyledItemText>{text}</StyledItemText>
   </StyledListItem>
 ));
 
 const SortableList = SortableContainer(({ items, onClickAction }) => (
   <StyledList>
-    {items.length ? (
+    {items && items.length ? (
       items.map((item, index) => (
         <SortableItem
           onClickAction={onClickAction}
@@ -39,9 +39,11 @@ const ToDoList = ({
   onSortEnd,
   onNewItemKeyPress,
   showCompletedToDos,
-  onClickToggleShowCompletedToDos
+  onClickToggleShowCompletedToDos,
+  title
 }) => (
   <div>
+    <h1>{title}</h1>
     <div style={{ margin: '3px 2px' }}>
       <Input name="newItem" placeholder="Add new item" onKeyPress={onNewItemKeyPress} />
     </div>
@@ -58,13 +60,13 @@ const ToDoList = ({
       <div>
         <hr style={{ visibility: 'hidden' }} />
         <StyledList>
-          {completedItems.map((item,index) => (
+          {completedItems && completedItems.map((item,index) => (
             <StyledListItem completed={true} key={item.id}>
               <Checkbox
                 checked="checked"
                 onClick={() => onClickUncompleteToDo({id: item.id})}
               />
-              {item.value}
+              <StyledItemText>{item.value}</StyledItemText>
             </StyledListItem>
           ))}
         </StyledList>
@@ -72,6 +74,10 @@ const ToDoList = ({
     )}
   </div>
 );
+
+const StyledItemText = styled.span`
+display: inline-block;
+`
 
 const StyledToggleLink = styled.span`
   color: white;
@@ -96,7 +102,9 @@ const StyledList = styled.ul`
 
 const StyledListItem = styled.li`
   color: black;
-  padding: 0px;
+  display: flex;
+  align-items: center;
+  padding: 0px 0.8rem 0 0;
   background: white;
   margin: 3px 2px;
   border-radius: 3px;list-style: none;

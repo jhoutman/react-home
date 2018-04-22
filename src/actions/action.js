@@ -7,3 +7,6 @@ export const uncompleteToDo = create(types.UNCOMPLETE_TODO);
 
 export const sortToDo = create(types.SORT_TODO);
 export const toggleShowCompletedToDos = create(types.TOGGLE_SHOW_COMPLETED_TODOS);
+
+// Recipes
+export const addToGroceryList = create(types.ADD_TO_GROCERY_LIST);
