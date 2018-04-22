@@ -1,4 +1,5 @@
 export const ADD_TODO = 'ADD_TODO';
-export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const UNCOMPLETE_TODO = 'UNCOMPLETE_TODO';
 export const SORT_TODO = 'SORT_TODO';
 export const TOGGLE_SHOW_COMPLETED_TODOS = 'TOGGLE_SHOW_COMPLETED_TODOS';

@@ -1,40 +1,39 @@
 import { connect } from 'react-redux';
-import ToDoList from '../components/ToDoList/ToDoList';
+import ToDoList from '../components/ToDoList';
 import * as actions from '../actions/action';
-import shortid from 'shortid';
 
 const mergeProps = (stateProps, dispatchProps) => {
-  const { toggleToDo, sortToDo, addToDo, toggleShowCompletedToDos } = dispatchProps;
-  const { items, visibilityFilter, showCompletedToDos } = stateProps;
+  const { completeToDo, uncompleteToDo, sortToDo, addToDo, toggleShowCompletedToDos } = dispatchProps;
+  const { items, completedItems, showCompletedToDos } = stateProps;
 
   const onNewItemKeyPress = event => {
     if (event.key === 'Enter') {
       event.currentTarget.value.trim() &&
-        addToDo({ id: shortid(), text: event.currentTarget.value.trim() });
+        addToDo({ text: event.currentTarget.value.trim() });
       event.currentTarget.value = '';
     }
   };
 
-  const getCompletedItems = () => items.filter(item => item.completed === true);
-  const getUncompletedItems = () => items.filter(item => item.completed === false);
-
   return {
-    onClickToggleToDo: event => {
-      toggleToDo({ id: event.target.value });
+    onClickCompleteToDo: id => {
+      completeToDo(id);
+    },
+    onClickUncompleteToDo: id => {
+      uncompleteToDo(id)
     },
     onSortEnd: sortToDo,
     onNewItemKeyPress,
-    completedItems: getCompletedItems(),
-    uncompletedItems: getUncompletedItems(),
+    completedItems,
+    uncompletedItems: items,
     showCompletedToDos,
     onClickToggleShowCompletedToDos: toggleShowCompletedToDos
   };
 };
 
-function mapStateToProps({ toDo: { items, visibilityFilter, showCompletedToDos } }) {
+function mapStateToProps({ list: { items, completedItems, showCompletedToDos } }) {
   return {
     items,
-    visibilityFilter,
+    completedItems,
     showCompletedToDos
   };
 }

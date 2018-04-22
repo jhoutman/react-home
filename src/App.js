@@ -3,7 +3,10 @@ import ToDoListContainer from './containers/ToDoListContainer';
 
 class App extends Component {
   render() {
-    return <ToDoListContainer />;
+    return <div>
+      <h1>Groceries</h1>
+      <ToDoListContainer />
+      </div>;
   }
 }
 

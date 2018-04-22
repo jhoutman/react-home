@@ -4,9 +4,25 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  font-size: 66.7%;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: black;
+  background: black url('https://jessicalouisamedia.files.wordpress.com/2014/09/darkstone_texture.jpg') 50% 50% no-repeat;
+  background-size: cover;
+  padding: 1rem;
+}
+
+h1, h2, h3 {
+  color: white;
+  font-size: 2rem;
 }
